@@ -9,7 +9,7 @@
 ## Install
 
 ```shell
-npm install --save-dev create-cert
+npm install --save create-cert
 ```
 
 ## License
