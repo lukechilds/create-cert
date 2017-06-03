@@ -3,6 +3,14 @@
 const pify = require('pify');
 const pem = require('pem');
 
+const renameProps = keys => Object.keys(keys).reduce((renamedKeys, key, i) => {
+	const keyData = keys[key];
+	key = key === 'certificate' ? 'cert' : key === 'clientKey' ? 'key' : key;
+	renamedKeys[key] = keyData;
+
+	return renamedKeys;
+}, {});
+
 const createCert = opts => {
 	opts = Object.assign({
 		days: 365,
@@ -16,7 +24,10 @@ const createCert = opts => {
 		serviceCertificate: caKeys.certificate,
 		serviceKey: caKeys.serviceKey,
 		serial: Date.now()
-	}, opts)).then(keys => ({ keys, caKeys })));
+	}, opts)).then(keys => ({
+		keys: renameProps(keys),
+		caKeys: renameProps(caKeys)
+	})));
 };
 
 module.exports = createCert;
