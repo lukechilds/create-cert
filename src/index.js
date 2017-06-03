@@ -5,7 +5,7 @@ const pem = require('pem');
 
 const createCert = opts => {
 	opts = Object.assign({
-		days: 1,
+		days: 365,
 		commonName: 'example.com'
 	}, opts);
 
