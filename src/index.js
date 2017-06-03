@@ -7,7 +7,7 @@ const createCert = opts => {
 	opts = Object.assign({
 		days: 365,
 		commonName: 'example.com'
-	}, opts);
+	}, typeof opts === 'string' ? { commonName: opts } : opts);
 
 	return pify(pem.createCertificate)({
 		days: opts.days,
