@@ -1,0 +1,22 @@
+'use strict';
+
+const pify = require('pify');
+const pem = require('pem');
+
+const createCert = opts => {
+	opts = Object.assign({
+		days: 1,
+		commonName: 'example.com'
+	}, opts);
+
+	return pify(pem.createCertificate)({
+		days: opts.days,
+		selfSigned: true
+	}).then(caKeys => pify(pem.createCertificate)(Object.assign({
+		serviceCertificate: caKeys.certificate,
+		serviceKey: caKeys.serviceKey,
+		serial: Date.now()
+	}, opts)).then(keys => ({ keys, caKeys })));
+};
+
+module.exports = createCert;
