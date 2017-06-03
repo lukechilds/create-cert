@@ -3,7 +3,7 @@
 const pify = require('pify');
 const pem = require('pem');
 
-const renameProps = keys => Object.keys(keys).reduce((renamedKeys, key, i) => {
+const renameProps = keys => Object.keys(keys).reduce((renamedKeys, key) => {
 	const keyData = keys[key];
 	key = key === 'certificate' ? 'cert' : key === 'clientKey' ? 'key' : key;
 	renamedKeys[key] = keyData;
