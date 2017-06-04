@@ -13,25 +13,23 @@ test('createCert returns a Promise', t => {
 });
 
 test('createCert() exposes expected properties', async t => {
-	const cert = await createCert();
-	const properties = ['csr', 'key', 'cert', 'serviceKey'];
-
-	Object.keys(cert).forEach(certType => properties.forEach(prop => {
-		t.true(typeof cert[certType][prop] !== 'undefined');
-	}));
+	const keys = await createCert();
+	['key', 'cert', 'caCert'].forEach(prop => {
+		t.true(typeof keys[prop] !== 'undefined');
+	});
 });
 
 test('SSL certificate uses expected default values', async t => {
-	const cert = await createCert();
-	const data = await pify(pem.readCertificateInfo)(cert.keys.cert);
+	const keys = await createCert();
+	const data = await pify(pem.readCertificateInfo)(keys.cert);
 
 	t.is(data.commonName, 'example.com');
 	t.is(differenceInDays(data.validity.end, data.validity.start), 365);
 });
 
 test('passing a string sets the commonName', async t => {
-	const cert = await createCert('foo.com');
-	const data = await pify(pem.readCertificateInfo)(cert.keys.cert);
+	const keys = await createCert('foo.com');
+	const data = await pify(pem.readCertificateInfo)(keys.cert);
 
 	t.is(data.commonName, 'foo.com');
 });
@@ -42,8 +40,8 @@ test('passing an object sets the certificate settings', async t => {
 		days: 1,
 		organization: 'bar'
 	};
-	const cert = await createCert(opts);
-	const data = await pify(pem.readCertificateInfo)(cert.keys.cert);
+	const keys = await createCert(opts);
+	const data = await pify(pem.readCertificateInfo)(keys.cert);
 
 	t.is(data.commonName, opts.commonName);
 	t.is(differenceInDays(data.validity.end, data.validity.start), opts.days);
