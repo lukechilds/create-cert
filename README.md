@@ -14,6 +14,19 @@
 npm install --save create-cert
 ```
 
+## Usage
+
+```js
+const createCert = require('create-cert');
+
+createCert().then(keys => console.log(keys));
+// {
+//   key: '-----BEGIN RSA PRIVATE KEY-----\n...',
+//   cert: '-----BEGIN CERTIFICATE-----\n...',
+//   caCert: '-----BEGIN CERTIFICATE-----\n...'
+// }
+```
+
 ## License
 
 MIT © Luke Childs
