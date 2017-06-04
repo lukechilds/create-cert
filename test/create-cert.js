@@ -35,3 +35,17 @@ test('passing a string sets the commonName', async t => {
 
 	t.is(data.commonName, 'foo.com');
 });
+
+test('passing an object sets the certificate settings', async t => {
+	const opts = {
+		commonName: 'foo.com',
+		days: 1,
+		organization: 'bar'
+	};
+	const cert = await createCert(opts);
+	const data = await pify(pem.readCertificateInfo)(cert.keys.cert);
+
+	t.is(data.commonName, opts.commonName);
+	t.is(differenceInDays(data.validity.end, data.validity.start), opts.days);
+	t.is(data.organization, opts.organization);
+});
