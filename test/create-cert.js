@@ -28,3 +28,10 @@ test('SSL certificate uses expected default values', async t => {
 	t.is(data.commonName, 'example.com');
 	t.is(differenceInDays(data.validity.end, data.validity.start), 365);
 });
+
+test('passing a string sets the commonName', async t => {
+	const cert = await createCert('foo.com');
+	const data = await pify(pem.readCertificateInfo)(cert.keys.cert);
+
+	t.is(data.commonName, 'foo.com');
+});
