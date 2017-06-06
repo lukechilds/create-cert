@@ -35,6 +35,19 @@ createCert().then(keys => {
 });
 ```
 
+For strict SSL usage you can set the common name for the certificate and validate it against the CA certificate. An example using the Got request client:
+
+```js
+createCert('foobar.com').then(keys => {
+   https.createServer(keys, (req, res) => res.end('Hi!')).listen(443, () => {
+     // This request will succeed without issues
+     // as the SSL certificate will successfully
+     // validate against the CA certificate.
+     got('https://foobar.com', { ca: keys.caCert });
+   });
+});
+```
+
 ## API
 
 ### createCert([options])
