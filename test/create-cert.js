@@ -1,6 +1,8 @@
+import https from 'https';
 import test from 'ava';
 import pify from 'pify';
 import pem from 'pem';
+import got from 'got';
 import differenceInDays from 'date-fns/difference_in_days';
 import createCert from '../';
 
@@ -46,4 +48,13 @@ test('passing an object sets the certificate settings', async t => {
 	t.is(data.commonName, opts.commonName);
 	t.is(differenceInDays(data.validity.end, data.validity.start), opts.days);
 	t.is(data.organization, opts.organization);
+});
+
+test('keys object can be passed directly into https.creatServer', async t => {
+	const keys = await createCert('foo.com');
+	const server = https.createServer(keys, (req, res) => res.end('Hi!'));
+	await pify(server.listen.bind(server))();
+
+	const { body } = await got('https://localhost:' + server.address().port, { rejectUnauthorized: false });
+	t.is(body, 'Hi!');
 });
