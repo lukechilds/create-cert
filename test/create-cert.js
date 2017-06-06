@@ -58,3 +58,15 @@ test('keys object can be passed directly into https.creatServer', async t => {
 	const { body } = await got('https://localhost:' + server.address().port, { rejectUnauthorized: false });
 	t.is(body, 'Hi!');
 });
+
+test('keys.caCert validates SSL certificate', async t => {
+	const keys = await createCert('foo.com');
+	const server = https.createServer(keys, (req, res) => res.end('Hi!'));
+	await pify(server.listen.bind(server))();
+
+	const { body } = await got('https://localhost:' + server.address().port, {
+		ca: keys.caCert,
+		headers: { host: 'foo.com' }
+	});
+	t.is(body, 'Hi!');
+});
