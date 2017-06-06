@@ -59,7 +59,7 @@ Returns a Promise which resolves to a `keys` object.
 Type: `string`, `object`<br>
 Default: `{ days: 365, commonName: 'example.com' }
 
-If a string is passed in, it will be used as the commonName. You can pass in any valid option for [`pem.createCertificate()`](https://github.com/Dexus/pem#create-a-certificate) to override the defaults.
+If a string is passed in, it will be used as the `commonName`. You can pass in any valid option for [`pem.createCertificate()`](https://github.com/Dexus/pem#create-a-certificate) to override the defaults.
 
 ## License
 
