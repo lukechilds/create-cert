@@ -30,8 +30,9 @@ createCert().then(keys => console.log(keys));
 You can create a fully functioning HTTPS server like so:
 
 ```js
-const keys = await createCert('foobar.com');
-https.createServer(keys, (req, res) => res.end('Hi!')).listen(443);
+createCert().then(keys => {
+   https.createServer(keys, (req, res) => res.end('Hi!')).listen(443);
+});
 ```
 
 ## License
