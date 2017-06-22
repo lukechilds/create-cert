@@ -1,7 +1,5 @@
 # create-cert
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/lukechilds/create-cert.svg)](https://greenkeeper.io/)
-
 > Super simple self signed certificates
 
 [![Build Status](https://travis-ci.org/lukechilds/create-cert.svg?branch=master)](https://travis-ci.org/lukechilds/create-cert)
