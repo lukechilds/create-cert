@@ -61,6 +61,10 @@ Default: `{ days: 365, commonName: 'example.com' }`
 
 If a string is passed in, it will be used as the `commonName`. You can pass in any valid option for [`pem.createCertificate()`](https://github.com/Dexus/pem#create-a-certificate) to override the defaults.
 
+## Related
+
+- [`create-test-server`](https://github.com/lukechilds/create-test-server) - Creates a minimal Express server for testing
+
 ## License
 
 MIT © Luke Childs
