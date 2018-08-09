@@ -29,7 +29,7 @@
   "homepage": "https://github.com/lukechilds/create-cert",
   "dependencies": {
     "pem": "^1.9.7",
-    "pify": "^3.0.0"
+    "pify": "^4.0.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
