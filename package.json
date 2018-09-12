@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/lukechilds/create-cert",
   "dependencies": {
-    "pem": "^1.9.7",
+    "pem": "^1.13.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
