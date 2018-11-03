@@ -36,7 +36,7 @@
     "coveralls": "^3.0.0",
     "date-fns": "^1.28.5",
     "eslint-config-xo-lukechilds": "^1.0.0",
-    "got": "^8.0.0",
+    "got": "^9.3.1",
     "nyc": "^11.0.2",
     "pem": "^1.9.7",
     "pify": "^3.0.0",
